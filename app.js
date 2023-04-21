@@ -1,0 +1,18 @@
+import dotenv from 'dotenv';
+dotenv.config();
+import express from 'express';
+import bodyParser from 'body-parser';
+import userRoute from './routes/User/User.js';
+import accountRoute from './routes/Account/Account.js';
+import policyRoute from './routes/Policy/Policy.js';
+const app  = express();
+import path from 'path';
+app.use(bodyParser.json());
+import {fileURLToPath} from 'url';
+const __dirname = fileURLToPath(import.meta.url);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.resolve(__dirname,'public')));
+app.use(userRoute);
+app.use(accountRoute);
+app.use(policyRoute);
+export default app;
